@@ -1,3 +1,3 @@
-import AnalyticsPageContent from '@/features/analitics/page.content';
+import AnalyticsPageContent from '@/features/analytics/page.content';
 
 export default AnalyticsPageContent;

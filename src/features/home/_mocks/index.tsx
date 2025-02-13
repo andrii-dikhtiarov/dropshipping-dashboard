@@ -1,8 +1,9 @@
 import { RecentOrder } from '@/types/order';
 import { InfoCardProps } from '@/features/home/_components/info-card';
 import { AlertCircle, DollarSign, Package, TrendingUp } from 'lucide-react';
+import { Shipment } from '@/types/shipment';
 
-export const SHIPMENT_DATA = [
+export const SHIPMENT_DATA: Shipment[] = [
   { id: 1, day: 'Mon', shipments: 12 },
   { id: 2, day: 'Tue', shipments: 19 },
   { id: 3, day: 'Wed', shipments: 15 },
@@ -20,7 +21,7 @@ export const RECENT_ORDERS: RecentOrder[] = [
   { id: 5, orderId: '1238', date: '2023-06-05', status: 'Delivered' },
 ];
 
-export const INFO_CARDS: InfoCardProps[] = [
+export const INFO_CARDS: (InfoCardProps & { id: number })[] = [
   {
     id: 1,
     title: 'Total Revenue',

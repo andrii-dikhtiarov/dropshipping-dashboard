@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Package, ShoppingCart, Boxes, CreditCard, Settings, Menu } from 'lucide-react';
+import { Package, ShoppingCart, Boxes, CreditCard, Settings, Menu, ChartBar } from 'lucide-react';
 
 const MainNav = () => {
   const pathname = usePathname();
@@ -35,6 +35,11 @@ const MainNav = () => {
       href: '/settings',
       label: 'Settings',
       icon: Settings,
+    },
+    {
+      href: '/analytics',
+      label: 'Analytics',
+      icon: ChartBar,
     },
   ];
 

@@ -1,6 +1,6 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
-import { Header } from './components/header';
+import { Header } from '@/components/header';
 import type React from 'react';
 import { Toaster } from '@/components/ui/toaster';
 

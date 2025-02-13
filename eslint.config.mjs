@@ -31,5 +31,7 @@ export default [...compat.extends(
         sourceType: "module",
     },
 
-    rules: {},
+    rules: {
+        "react/react-in-jsx-scope": "off",
+    },
 }];

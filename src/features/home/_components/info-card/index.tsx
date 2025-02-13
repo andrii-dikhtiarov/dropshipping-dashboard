@@ -1,15 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-export interface DashboardCardProps {
+export interface InfoCardProps {
+  id: number;
   title: string;
   icon: React.ReactElement;
   mainInfo: string;
   secondaryInfo: string;
 }
 
-export const InfoCard = ({ title, icon, mainInfo, secondaryInfo }: DashboardCardProps) => {
+export const InfoCard = ({ title, icon, mainInfo, secondaryInfo }: InfoCardProps) => {
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         {icon}

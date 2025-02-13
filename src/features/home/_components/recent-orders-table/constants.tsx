@@ -4,7 +4,7 @@ import { RecentOrder } from '@/types/order';
 export const RECENT_ORDERS_COLUMNS: Column<RecentOrder>[] = [
   {
     header: () => 'Order ID',
-    cell: ({ id }) => id,
+    cell: ({ orderId }) => orderId,
   },
   {
     header: () => 'Date',

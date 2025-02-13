@@ -1,5 +1,6 @@
 export interface RecentOrder {
-  id: string;
+  id: number;
+  orderId: string;
   date: string;
   status: string;
 }

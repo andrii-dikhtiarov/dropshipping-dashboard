@@ -32,6 +32,10 @@ export default [...compat.extends(
     },
 
     rules: {
+        "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
+        "react/no-unknown-property": "warn",
+        "react/no-unescaped-entities": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
     },
 }];

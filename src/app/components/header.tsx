@@ -1,8 +1,13 @@
-import Link from "next/link"
-import { Bell, User, Package } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import MainNav from "./main-nav"
+import Link from 'next/link';
+import { Bell, User, Package } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import MainNav from './main-nav';
 
 export function Header() {
   return (
@@ -31,6 +36,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }
-

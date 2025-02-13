@@ -1,46 +1,53 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function SettingsPage() {
   const [profile, setProfile] = useState({
-    name: "John Doe",
-    email: "john@example.com",
-    company: "Acme Inc.",
-  })
+    name: 'John Doe',
+    email: 'john@example.com',
+    company: 'Acme Inc.',
+  });
 
   const [password, setPassword] = useState({
-    current: "",
-    new: "",
-    confirm: "",
-  })
+    current: '',
+    new: '',
+    confirm: '',
+  });
 
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setProfile((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setProfile((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setPassword((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setPassword((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleProfileSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Updated profile:", profile)
+    e.preventDefault();
+    console.log('Updated profile:', profile);
     // Here you would typically send this data to your backend
-  }
+  };
 
   const handlePasswordSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Password change request:", password)
+    e.preventDefault();
+    console.log('Password change request:', password);
     // Here you would typically send this data to your backend
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -62,15 +69,31 @@ export default function SettingsPage() {
               <CardContent className="space-y-2">
                 <div className="space-y-1">
                   <Label htmlFor="name">Name</Label>
-                  <Input id="name" name="name" value={profile.name} onChange={handleProfileChange} />
+                  <Input
+                    id="name"
+                    name="name"
+                    value={profile.name}
+                    onChange={handleProfileChange}
+                  />
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" name="email" type="email" value={profile.email} onChange={handleProfileChange} />
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={profile.email}
+                    onChange={handleProfileChange}
+                  />
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="company">Company</Label>
-                  <Input id="company" name="company" value={profile.company} onChange={handleProfileChange} />
+                  <Input
+                    id="company"
+                    name="company"
+                    value={profile.company}
+                    onChange={handleProfileChange}
+                  />
                 </div>
               </CardContent>
               <CardFooter>
@@ -83,7 +106,9 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Password</CardTitle>
-              <CardDescription>Change your password here. After saving, you'll be logged out.</CardDescription>
+              <CardDescription>
+                Change your password here. After saving, you'll be logged out.
+              </CardDescription>
             </CardHeader>
             <form onSubmit={handlePasswordSubmit}>
               <CardContent className="space-y-2">
@@ -99,7 +124,13 @@ export default function SettingsPage() {
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="new">New password</Label>
-                  <Input id="new" name="new" type="password" value={password.new} onChange={handlePasswordChange} />
+                  <Input
+                    id="new"
+                    name="new"
+                    type="password"
+                    value={password.new}
+                    onChange={handlePasswordChange}
+                  />
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="confirm">Confirm new password</Label>
@@ -132,6 +163,5 @@ export default function SettingsPage() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
-

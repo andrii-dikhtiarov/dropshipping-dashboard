@@ -1,11 +1,24 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Dialog,
   DialogContent,
@@ -14,114 +27,118 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Label } from "@/components/ui/label"
-import { toast } from "@/components/ui/use-toast"
-import Image from "next/image"
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { toast } from '@/components/ui/use-toast';
+import Image from 'next/image';
 
 // Mock data for inventory
 const inventoryData = [
   {
     id: 1,
-    sku: "SKU001",
-    name: "T-Shirt",
-    image: "/placeholder.svg",
-    warehouse: "China",
+    sku: 'SKU001',
+    name: 'T-Shirt',
+    image: '/placeholder.svg',
+    warehouse: 'China',
     stock: 100,
     threshold: 20,
     runoutDays: 30,
   },
   {
     id: 2,
-    sku: "SKU002",
-    name: "Jeans",
-    image: "/placeholder.svg",
-    warehouse: "EU",
+    sku: 'SKU002',
+    name: 'Jeans',
+    image: '/placeholder.svg',
+    warehouse: 'EU',
     stock: 50,
     threshold: 10,
     runoutDays: 15,
   },
   {
     id: 3,
-    sku: "SKU003",
-    name: "Sneakers",
-    image: "/placeholder.svg",
-    warehouse: "US",
+    sku: 'SKU003',
+    name: 'Sneakers',
+    image: '/placeholder.svg',
+    warehouse: 'US',
     stock: 75,
     threshold: 15,
     runoutDays: 45,
   },
   {
     id: 4,
-    sku: "SKU004",
-    name: "Hat",
-    image: "/placeholder.svg",
-    warehouse: "China",
+    sku: 'SKU004',
+    name: 'Hat',
+    image: '/placeholder.svg',
+    warehouse: 'China',
     stock: 200,
     threshold: 30,
     runoutDays: 60,
   },
   {
     id: 5,
-    sku: "SKU005",
-    name: "Socks",
-    image: "/placeholder.svg",
-    warehouse: "EU",
+    sku: 'SKU005',
+    name: 'Socks',
+    image: '/placeholder.svg',
+    warehouse: 'EU',
     stock: 150,
     threshold: 25,
     runoutDays: 90,
   },
-]
+];
 
 export default function InventoryPage() {
-  const [filter, setFilter] = useState("")
-  const [warehouse, setWarehouse] = useState("All")
-  const [category, setCategory] = useState("All")
-  const [selectedItems, setSelectedItems] = useState<number[]>([])
-  const [reorderItem, setReorderItem] = useState<(typeof inventoryData)[0] | null>(null)
-  const [thresholdItem, setThresholdItem] = useState<(typeof inventoryData)[0] | null>(null)
-  const [newThreshold, setNewThreshold] = useState<number | "">("")
-  const [inventory, setInventory] = useState(inventoryData)
+  const [filter, setFilter] = useState('');
+  const [warehouse, setWarehouse] = useState('All');
+  const [category, setCategory] = useState('All');
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [reorderItem, setReorderItem] = useState<(typeof inventoryData)[0] | null>(null);
+  const [thresholdItem, setThresholdItem] = useState<(typeof inventoryData)[0] | null>(null);
+  const [newThreshold, setNewThreshold] = useState<number | ''>('');
+  const [inventory, setInventory] = useState(inventoryData);
 
   const filteredInventory = inventory.filter(
     (item) =>
       (item.sku.toLowerCase().includes(filter.toLowerCase()) ||
         item.name.toLowerCase().includes(filter.toLowerCase())) &&
-      (warehouse === "All" || item.warehouse === warehouse) &&
-      (category === "All" || item.sku.startsWith(category)),
-  )
+      (warehouse === 'All' || item.warehouse === warehouse) &&
+      (category === 'All' || item.sku.startsWith(category)),
+  );
 
   const handleCheckboxChange = (id: number) => {
-    setSelectedItems((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]))
-  }
+    setSelectedItems((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    );
+  };
 
   const handleBulkReorder = () => {
-    console.log("Bulk reorder for items:", selectedItems)
+    console.log('Bulk reorder for items:', selectedItems);
     // Here you would typically send this data to your backend
     toast({
-      title: "Bulk Reorder Initiated",
+      title: 'Bulk Reorder Initiated',
       description: `Reorder request sent for ${selectedItems.length} items.`,
-    })
-  }
+    });
+  };
 
   const handleThresholdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setNewThreshold(value === "" ? "" : Number(value))
-  }
+    const value = e.target.value;
+    setNewThreshold(value === '' ? '' : Number(value));
+  };
 
   const handleThresholdSubmit = () => {
-    if (thresholdItem && newThreshold !== "") {
+    if (thresholdItem && newThreshold !== '') {
       setInventory((prev) =>
-        prev.map((item) => (item.id === thresholdItem.id ? { ...item, threshold: Number(newThreshold) } : item)),
-      )
+        prev.map((item) =>
+          item.id === thresholdItem.id ? { ...item, threshold: Number(newThreshold) } : item,
+        ),
+      );
       toast({
-        title: "Threshold Updated",
+        title: 'Threshold Updated',
         description: `Low stock threshold for ${thresholdItem.name} updated to ${newThreshold}.`,
-      })
-      setThresholdItem(null)
-      setNewThreshold("")
+      });
+      setThresholdItem(null);
+      setNewThreshold('');
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -166,7 +183,9 @@ export default function InventoryPage() {
                 checked={selectedItems.length === filteredInventory.length}
                 onCheckedChange={() =>
                   setSelectedItems(
-                    selectedItems.length === filteredInventory.length ? [] : filteredInventory.map((item) => item.id),
+                    selectedItems.length === filteredInventory.length
+                      ? []
+                      : filteredInventory.map((item) => item.id),
                   )
                 }
               />
@@ -183,7 +202,7 @@ export default function InventoryPage() {
         </TableHeader>
         <TableBody>
           {filteredInventory.map((item) => (
-            <TableRow key={item.id} className={item.stock < item.threshold ? "bg-red-100" : ""}>
+            <TableRow key={item.id} className={item.stock < item.threshold ? 'bg-red-100' : ''}>
               <TableCell>
                 <Checkbox
                   checked={selectedItems.includes(item.id)}
@@ -193,7 +212,12 @@ export default function InventoryPage() {
               <TableCell>{item.sku}</TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell>
-                <Image src={item.image || "/placeholder.svg"} alt={item.name} width={50} height={50} />
+                <Image
+                  src={item.image || '/placeholder.svg'}
+                  alt={item.name}
+                  width={50}
+                  height={50}
+                />
               </TableCell>
               <TableCell>{item.warehouse}</TableCell>
               <TableCell>{item.stock}</TableCell>
@@ -210,7 +234,9 @@ export default function InventoryPage() {
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>
                         <DialogTitle>Reorder {reorderItem?.name}</DialogTitle>
-                        <DialogDescription>Enter the quantity you want to reorder for this product.</DialogDescription>
+                        <DialogDescription>
+                          Enter the quantity you want to reorder for this product.
+                        </DialogDescription>
                       </DialogHeader>
                       <div className="grid gap-4 py-4">
                         <div className="grid grid-cols-4 items-center gap-4">
@@ -239,7 +265,9 @@ export default function InventoryPage() {
                     <DialogContent className="sm:max-w-[425px]">
                       <DialogHeader>
                         <DialogTitle>Set Low Stock Threshold for {thresholdItem?.name}</DialogTitle>
-                        <DialogDescription>Enter the new low stock threshold for this product.</DialogDescription>
+                        <DialogDescription>
+                          Enter the new low stock threshold for this product.
+                        </DialogDescription>
                       </DialogHeader>
                       <div className="grid gap-4 py-4">
                         <div className="grid grid-cols-4 items-center gap-4">
@@ -275,6 +303,5 @@ export default function InventoryPage() {
         </div>
       )}
     </div>
-  )
+  );
 }
-

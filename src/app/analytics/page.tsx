@@ -1,24 +1,32 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 const salesData = [
-  { date: "2023-01", sales: 4000 },
-  { date: "2023-02", sales: 3000 },
-  { date: "2023-03", sales: 5000 },
-  { date: "2023-04", sales: 4500 },
-  { date: "2023-05", sales: 6000 },
-  { date: "2023-06", sales: 5500 },
-]
+  { date: '2023-01', sales: 4000 },
+  { date: '2023-02', sales: 3000 },
+  { date: '2023-03', sales: 5000 },
+  { date: '2023-04', sales: 4500 },
+  { date: '2023-05', sales: 6000 },
+  { date: '2023-06', sales: 5500 },
+];
 
 const topProducts = [
-  { name: "T-Shirt", sales: 1200 },
-  { name: "Jeans", sales: 950 },
-  { name: "Sneakers", sales: 850 },
-  { name: "Hat", sales: 600 },
-  { name: "Socks", sales: 500 },
-]
+  { name: 'T-Shirt', sales: 1200 },
+  { name: 'Jeans', sales: 950 },
+  { name: 'Sneakers', sales: 850 },
+  { name: 'Hat', sales: 600 },
+  { name: 'Socks', sales: 500 },
+];
 
 export default function AnalyticsPage() {
   return (
@@ -88,7 +96,7 @@ export default function AnalyticsPage() {
         <CardContent>
           <ul className="space-y-2">
             {topProducts.map((product, index) => (
-              <li key={index} className="flex justify-between items-center">
+              <li key={index} className="flex items-center justify-between">
                 <span>{product.name}</span>
                 <span>{product.sales} units</span>
               </li>
@@ -97,6 +105,5 @@ export default function AnalyticsPage() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
-

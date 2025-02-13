@@ -1,9 +1,16 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import {
   Dialog,
   DialogContent,
@@ -12,44 +19,50 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Label } from "@/components/ui/label"
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 
 const productsData = [
-  { id: 1, name: "T-Shirt", sku: "TS001", price: 19.99, cost: 5.0, supplier: "Supplier A" },
-  { id: 2, name: "Jeans", sku: "JN001", price: 49.99, cost: 15.0, supplier: "Supplier B" },
-  { id: 3, name: "Sneakers", sku: "SN001", price: 79.99, cost: 25.0, supplier: "Supplier C" },
-  { id: 4, name: "Hat", sku: "HT001", price: 24.99, cost: 8.0, supplier: "Supplier A" },
-  { id: 5, name: "Socks", sku: "SK001", price: 9.99, cost: 2.0, supplier: "Supplier B" },
-]
+  { id: 1, name: 'T-Shirt', sku: 'TS001', price: 19.99, cost: 5.0, supplier: 'Supplier A' },
+  { id: 2, name: 'Jeans', sku: 'JN001', price: 49.99, cost: 15.0, supplier: 'Supplier B' },
+  { id: 3, name: 'Sneakers', sku: 'SN001', price: 79.99, cost: 25.0, supplier: 'Supplier C' },
+  { id: 4, name: 'Hat', sku: 'HT001', price: 24.99, cost: 8.0, supplier: 'Supplier A' },
+  { id: 5, name: 'Socks', sku: 'SK001', price: 9.99, cost: 2.0, supplier: 'Supplier B' },
+];
 
 export default function ProductsPage() {
-  const [filter, setFilter] = useState("")
-  const [newProduct, setNewProduct] = useState({ name: "", sku: "", price: "", cost: "", supplier: "" })
+  const [filter, setFilter] = useState('');
+  const [newProduct, setNewProduct] = useState({
+    name: '',
+    sku: '',
+    price: '',
+    cost: '',
+    supplier: '',
+  });
 
   const filteredProducts = productsData.filter(
     (product) =>
       product.name.toLowerCase().includes(filter.toLowerCase()) ||
       product.sku.toLowerCase().includes(filter.toLowerCase()),
-  )
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setNewProduct((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setNewProduct((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleAddProduct = () => {
     // Here you would typically send this data to your backend
-    console.log("New product:", newProduct)
+    console.log('New product:', newProduct);
     // Reset the form
-    setNewProduct({ name: "", sku: "", price: "", cost: "", supplier: "" })
-  }
+    setNewProduct({ name: '', sku: '', price: '', cost: '', supplier: '' });
+  };
 
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">Product Management</h1>
 
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <Input
           placeholder="Search by Product Name or SKU"
           value={filter}
@@ -84,7 +97,13 @@ export default function ProductsPage() {
                 <Label htmlFor="sku" className="text-right">
                   SKU
                 </Label>
-                <Input id="sku" name="sku" value={newProduct.sku} onChange={handleInputChange} className="col-span-3" />
+                <Input
+                  id="sku"
+                  name="sku"
+                  value={newProduct.sku}
+                  onChange={handleInputChange}
+                  className="col-span-3"
+                />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="price" className="text-right">
@@ -163,6 +182,5 @@ export default function ProductsPage() {
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
-

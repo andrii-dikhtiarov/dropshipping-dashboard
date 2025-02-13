@@ -1,60 +1,77 @@
-"use client"
+'use client';
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Checkbox } from "@/components/ui/checkbox"
-import { toast } from "@/components/ui/use-toast"
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Checkbox } from '@/components/ui/checkbox';
+import { toast } from '@/components/ui/use-toast';
 
 // Mock inventory data
 const inventoryData = [
-  { id: 1, sku: "SKU001", name: "T-Shirt", price: 19.99, stock: 100 },
-  { id: 2, sku: "SKU002", name: "Jeans", price: 49.99, stock: 50 },
-  { id: 3, sku: "SKU003", name: "Sneakers", price: 79.99, stock: 75 },
-  { id: 4, sku: "SKU004", name: "Hat", price: 24.99, stock: 200 },
-  { id: 5, sku: "SKU005", name: "Socks", price: 9.99, stock: 150 },
-]
+  { id: 1, sku: 'SKU001', name: 'T-Shirt', price: 19.99, stock: 100 },
+  { id: 2, sku: 'SKU002', name: 'Jeans', price: 49.99, stock: 50 },
+  { id: 3, sku: 'SKU003', name: 'Sneakers', price: 79.99, stock: 75 },
+  { id: 4, sku: 'SKU004', name: 'Hat', price: 24.99, stock: 200 },
+  { id: 5, sku: 'SKU005', name: 'Socks', price: 9.99, stock: 150 },
+];
 
 export default function CreateOrderPage() {
-  const router = useRouter()
+  const router = useRouter();
   const [shippingDetails, setShippingDetails] = useState({
-    receiverName: "",
-    address: "",
-    city: "",
-    country: "",
-    postalCode: "",
-    shippingMethod: "",
-  })
-  const [selectedItems, setSelectedItems] = useState<number[]>([])
-  const [quantities, setQuantities] = useState<{ [key: number]: number }>({})
+    receiverName: '',
+    address: '',
+    city: '',
+    country: '',
+    postalCode: '',
+    shippingMethod: '',
+  });
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
-  const handleShippingDetailsChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setShippingDetails((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleShippingDetailsChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setShippingDetails((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleShippingMethodChange = (value: string) => {
-    setShippingDetails((prev) => ({ ...prev, shippingMethod: value }))
-  }
+    setShippingDetails((prev) => ({ ...prev, shippingMethod: value }));
+  };
 
   const handleItemSelection = (itemId: number) => {
-    setSelectedItems((prev) => (prev.includes(itemId) ? prev.filter((id) => id !== itemId) : [...prev, itemId]))
+    setSelectedItems((prev) =>
+      prev.includes(itemId) ? prev.filter((id) => id !== itemId) : [...prev, itemId],
+    );
     if (!quantities[itemId]) {
-      setQuantities((prev) => ({ ...prev, [itemId]: 1 }))
+      setQuantities((prev) => ({ ...prev, [itemId]: 1 }));
     }
-  }
+  };
 
   const handleQuantityChange = (itemId: number, quantity: number) => {
-    setQuantities((prev) => ({ ...prev, [itemId]: quantity }))
-  }
+    setQuantities((prev) => ({ ...prev, [itemId]: quantity }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically send this data to your backend
     const orderData = {
       shippingDetails,
@@ -62,15 +79,15 @@ export default function CreateOrderPage() {
         ...inventoryData.find((item) => item.id === id),
         quantity: quantities[id],
       })),
-      status: [{ status: "Created", date: new Date().toISOString() }],
-    }
-    console.log("New order:", orderData)
+      status: [{ status: 'Created', date: new Date().toISOString() }],
+    };
+    console.log('New order:', orderData);
     toast({
-      title: "Order Created",
-      description: "Your order has been successfully created.",
-    })
-    router.push("/orders")
-  }
+      title: 'Order Created',
+      description: 'Your order has been successfully created.',
+    });
+    router.push('/orders');
+  };
 
   return (
     <div className="space-y-6">
@@ -132,7 +149,10 @@ export default function CreateOrderPage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="shippingMethod">Shipping Method</Label>
-              <Select onValueChange={handleShippingMethodChange} value={shippingDetails.shippingMethod}>
+              <Select
+                onValueChange={handleShippingMethodChange}
+                value={shippingDetails.shippingMethod}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select shipping method" />
                 </SelectTrigger>
@@ -177,8 +197,10 @@ export default function CreateOrderPage() {
                       type="number"
                       min="1"
                       max={item.stock}
-                      value={quantities[item.id] || ""}
-                      onChange={(e) => handleQuantityChange(item.id, Number.parseInt(e.target.value))}
+                      value={quantities[item.id] || ''}
+                      onChange={(e) =>
+                        handleQuantityChange(item.id, Number.parseInt(e.target.value))
+                      }
                       disabled={!selectedItems.includes(item.id)}
                       className="w-20"
                     />
@@ -192,6 +214,5 @@ export default function CreateOrderPage() {
         <Button type="submit">Create Order</Button>
       </form>
     </div>
-  )
+  );
 }
-

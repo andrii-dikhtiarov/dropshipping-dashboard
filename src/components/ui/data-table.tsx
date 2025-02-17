@@ -31,6 +31,7 @@ interface Props<TData extends TDataBase> {
   rowHeight?: number;
   isLoading?: boolean;
   className?: string;
+  getTBodyRowClassName?: (item?: TData) => string | undefined;
 }
 
 const defaultColumnWidth = 160;
@@ -41,6 +42,7 @@ export function DataTable<TData extends TDataBase>({
   isLoading,
   rowHeight,
   className,
+  getTBodyRowClassName,
 }: Props<TData>) {
   const visibleColumns = columns.filter(({ hidden }) => !hidden);
 
@@ -52,7 +54,7 @@ export function DataTable<TData extends TDataBase>({
           <TableRow>
             {visibleColumns.map(({ header, truncate = true, width = defaultColumnWidth }, idx) => (
               <TableHead className={cn(truncate && 'truncate')} style={{ width }} key={idx}>
-                header()
+                {header()}
               </TableHead>
             ))}
           </TableRow>
@@ -63,7 +65,11 @@ export function DataTable<TData extends TDataBase>({
           {!!data.length &&
             !isLoading &&
             data.map((rowData) => (
-              <TableRow style={{ height: rowHeight }} key={rowData.id}>
+              <TableRow
+                style={{ height: rowHeight }}
+                key={rowData.id}
+                className={cn(getTBodyRowClassName?.(rowData) ?? '')}
+              >
                 {visibleColumns.map(
                   ({ cell, truncate = true, width = defaultColumnWidth }, idx) => (
                     <TableCell

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { DataTable } from '@/components/ui/data-table';
 import { RecentOrder } from '@/types/order';
-import { RECENT_ORDERS_COLUMNS } from '@/features/home/_components/recent-orders-table/constants';
+import { RECENT_ORDERS_COLUMNS } from '@/features/dashboard/_components/recent-orders-table/constants';
 
 export interface RecentOrdersTableProps {
   title: string;

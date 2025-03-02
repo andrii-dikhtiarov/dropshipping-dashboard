@@ -1,12 +1,12 @@
 'use client';
 
-import { InfoCard } from '@/features/home/_components/info-card';
-import { ShipmentsChartCard } from '@/features/home/_components/shipments-chart-card';
-import { RecentOrdersTable } from '@/features/home/_components/recent-orders-table';
-import { INFO_CARDS, RECENT_ORDERS, SHIPMENT_DATA } from '@/features/home/_mocks';
-import { DashboardAlert } from '@/features/home/_components/dashboard-alert';
+import { InfoCard } from '@/features/dashboard/_components/info-card';
+import { ShipmentsChartCard } from '@/features/dashboard/_components/shipments-chart-card';
+import { RecentOrdersTable } from '@/features/dashboard/_components/recent-orders-table';
+import { INFO_CARDS, RECENT_ORDERS, SHIPMENT_DATA } from '@/features/dashboard/_mocks';
+import { DashboardAlert } from '@/features/dashboard/_components/dashboard-alert';
 
-export function HomePageContent() {
+export function DashboardPageContent() {
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">Dashboard</h1>

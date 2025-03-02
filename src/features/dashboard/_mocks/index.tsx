@@ -1,5 +1,5 @@
 import { RecentOrder } from '@/types/order';
-import { InfoCardProps } from '@/features/home/_components/info-card';
+import { InfoCardProps } from '@/features/dashboard/_components/info-card';
 import { AlertCircle, DollarSign, Package, TrendingUp } from 'lucide-react';
 import { Shipment } from '@/types/shipment';
 

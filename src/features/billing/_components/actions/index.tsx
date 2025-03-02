@@ -5,15 +5,10 @@ import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { DateRange } from 'react-day-picker';
 import { useMemo } from 'react';
+import { Select } from '../select';
+import { STATUS_SELECT_OPTIONS } from '@/features/billing/_mocks';
 
 export interface ActionsProps {
   filter: string;
@@ -51,6 +46,7 @@ export const Actions = ({
         onChange={(e) => setFilter(e.target.value)}
         className="max-w-sm"
       />
+
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -64,6 +60,7 @@ export const Actions = ({
             {formattedDateRange}
           </Button>
         </PopoverTrigger>
+
         <PopoverContent className="w-auto p-0">
           <Calendar
             initialFocus
@@ -76,17 +73,12 @@ export const Actions = ({
         </PopoverContent>
       </Popover>
 
-      <Select value={status} onValueChange={setStatus}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Filter by Status" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All Statuses</SelectItem>
-          <SelectItem value="Unpaid">Unpaid</SelectItem>
-          <SelectItem value="Pending Confirmation">Pending Confirmation</SelectItem>
-          <SelectItem value="Paid">Paid</SelectItem>
-        </SelectContent>
-      </Select>
+      <Select
+        placeholder="Filter by Status"
+        value={status}
+        onValueChange={setStatus}
+        options={STATUS_SELECT_OPTIONS}
+      />
     </div>
   );
 };

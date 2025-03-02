@@ -38,3 +38,10 @@ export const INVOICES_DATA: Invoice[] = [
     paymentReference: 'REF123456',
   },
 ];
+
+export const STATUS_SELECT_OPTIONS = [
+  { value: 'All', label: 'All Statuses' },
+  { value: 'Unpaid', label: 'Unpaid' },
+  { value: 'Pending Confirmation', label: 'Pending Confirmation' },
+  { value: 'Paid', label: 'Paid' },
+];

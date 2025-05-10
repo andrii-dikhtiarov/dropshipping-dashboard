@@ -1,0 +1,31 @@
+'use client';
+
+import { InfoCard } from '@/features/dashboard/_components/info-card';
+import { ShipmentsChartCard } from '@/features/dashboard/_components/shipments-chart-card';
+import { RecentOrdersTable } from '@/features/dashboard/_components/recent-orders-table';
+import { INFO_CARDS, RECENT_ORDERS, SHIPMENT_DATA } from '@/features/dashboard/_mocks';
+import { DashboardAlert } from '@/features/dashboard/_components/dashboard-alert';
+
+export function DashboardPageContent() {
+  return (
+    <div className="space-y-8">
+      <h1 className="text-3xl font-bold">Dashboard</h1>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {INFO_CARDS.map((card) => (
+          <InfoCard key={card.id} {...card} />
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <ShipmentsChartCard title="Shipments (Last 7 Days)" data={SHIPMENT_DATA} />
+        <RecentOrdersTable title="Recent Orders" data={RECENT_ORDERS} />
+      </div>
+
+      <DashboardAlert
+        title="Holiday Notice"
+        description="Our warehouses will be closed on July 4th. Please plan your orders accordingly."
+      />
+    </div>
+  );
+}
